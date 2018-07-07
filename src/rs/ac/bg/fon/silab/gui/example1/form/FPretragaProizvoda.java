@@ -134,7 +134,7 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
      private void popuniTabeluProizvoda() {
         try {
             List<ProizvodEntity> proizvodiLista=new ArrayList<>();
-            List<IDomainEntity> proizvodi = Controller.vratiSve(new ProizvodEntity());
+            List<ProizvodEntity> proizvodi = Controller.ucitajProizvode();
             for (IDomainEntity iDomainEntity : proizvodi) {
                 proizvodiLista.add((ProizvodEntity)iDomainEntity);
             }

@@ -82,7 +82,6 @@ public class FProizvod extends javax.swing.JDialog {
 
         jLabelCena.setText("Cena:");
 
-        jTxtCena.setText("a");
         jTxtCena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtCenaActionPerformed(evt);
@@ -99,8 +98,6 @@ public class FProizvod extends javax.swing.JDialog {
         });
 
         jLabelNaziv.setText("Naziv:");
-
-        jTxtNaziv.setText("a");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -209,7 +206,7 @@ public class FProizvod extends javax.swing.JDialog {
             Double cena   = Double.parseDouble(jTxtCena.getText().trim());
             TipProizvodaEntity tipPr = (TipProizvodaEntity) jComboTipProizvoda.getSelectedItem();
             ProizvodEntity proizvod = new ProizvodEntity(naziv, cena, tipPr);
-            proizvod = (ProizvodEntity) Controller.sacuvaj(proizvod);
+            proizvod = (ProizvodEntity) Controller.zapamtiProizvod(proizvod);
             JOptionPane.showMessageDialog(this, "Uspesno je sacuvan proizvod!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -222,8 +219,8 @@ public class FProizvod extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIzmeniActionPerformed
 
     private void jBtnIzaberiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIzaberiActionPerformed
-        JDialog fIzaberiMesto = new FIzaberiMesto(null, true);
-        fIzaberiMesto.setVisible(rootPaneCheckingEnabled);
+//        JDialog fIzaberiMesto = new FIzaberiMesto(null, true);
+//        fIzaberiMesto.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jBtnIzaberiActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -282,7 +279,7 @@ public class FProizvod extends javax.swing.JDialog {
     private void popuniComboZaTipProizvoda() {
         try {
             jComboTipProizvoda.removeAllItems();
-            List<IDomainEntity> tipoviproizvoda = Controller.vratiSve(new TipProizvodaEntity());
+            List<TipProizvodaEntity> tipoviproizvoda = Controller.ucitajListuTipovaProizvoda();
             
             for (IDomainEntity tip : tipoviproizvoda) {
                 if(tip instanceof TipProizvodaEntity)
@@ -296,6 +293,7 @@ public class FProizvod extends javax.swing.JDialog {
     private void pripremiZaPregled(Long prID) {
         pripremiFormu(FormMode.PREGLED);
         try {
+            System.out.println("aaaaaaaaaa");
             proizvod = Controller.nadjiProizvodPoIDu(prID);
             setTitle("Pregled proizvoda: " + proizvod.getNazivProizvoda());
             

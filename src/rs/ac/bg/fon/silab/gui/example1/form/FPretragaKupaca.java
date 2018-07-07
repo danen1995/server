@@ -110,7 +110,7 @@ public class FPretragaKupaca extends javax.swing.JDialog {
     private void jButtonDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetaljiActionPerformed
         int selectedRow = jTableKupci.getSelectedRow();
         if (selectedRow >= 0) {
-            String JMBG = String.valueOf(jTableKupci.getValueAt(selectedRow, 0));
+            String JMBG = String.valueOf(jTableKupci.getValueAt(selectedRow, 0)).trim();
             JOptionPane.showMessageDialog(null, "Sistem je nasao podatke o izabranom kupcu. Izabrani kupac ima JMBG: " + JMBG);
 
             JDialog fKupac = new FKupac(null, true, JMBG);
@@ -132,7 +132,7 @@ public class FPretragaKupaca extends javax.swing.JDialog {
 private void popuniTabeluKupaca() {
         try {
             List<KupacEntity> kupciLista=new ArrayList<>();
-            List<IDomainEntity> kupci = Controller.vratiSve(new KupacEntity());
+            List<KupacEntity> kupci = Controller.ucitajKupce();
             for (IDomainEntity iDomainEntity : kupci) {
                 kupciLista.add((KupacEntity)iDomainEntity);
             }

@@ -127,9 +127,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTxtCena">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="a"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtCenaActionPerformed"/>
           </Events>
@@ -163,9 +160,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTxtNaziv">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="a"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

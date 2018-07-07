@@ -39,6 +39,7 @@ public class FKupac extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         popuniComboZaMesto();
+        System.out.println(kupacJMBG);
         pripremiZaPregled(kupacJMBG);
         centrirajFormu();
     }
@@ -90,7 +91,6 @@ public class FKupac extends javax.swing.JDialog {
 
         jLabelIme.setText("Ime:");
 
-        jTxtIme.setText("a");
         jTxtIme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtImeActionPerformed(evt);
@@ -99,15 +99,15 @@ public class FKupac extends javax.swing.JDialog {
 
         jLabelPrezime.setText("Prezime:");
 
-        jTxtPrezime.setText("a");
+        jTxtPrezime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtPrezimeActionPerformed(evt);
+            }
+        });
 
         jLabelDatumRodj.setText("Datum rodjenja:");
 
-        jTxtDatumRodj.setText("11.11.1111");
-
         jLabelEmail.setText("Email:");
-
-        jTxtEmail.setText("a");
 
         jLabelMesto.setText("Mesto:");
 
@@ -120,15 +120,15 @@ public class FKupac extends javax.swing.JDialog {
 
         jLabelJMBG.setText("Jmbg:");
 
-        jTxtJMBG.setText("a");
-
         jLabelBrTel.setText("Broj telefona:");
 
-        jTxtBrojTelefona.setText("a");
+        jTxtBrojTelefona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtBrojTelefonaActionPerformed(evt);
+            }
+        });
 
         jLabelAdresa.setText("Adresa:");
-
-        jTxtAdresa.setText("a");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -274,7 +274,7 @@ public class FKupac extends javax.swing.JDialog {
             KupacEntity kupac = new KupacEntity(jmbg, ime, prezime, datumRodj, email, brTel, adresa, mesto);
             System.out.println("AvA: "+kupac.toString());
 //            kupac = Controller.sacuvajKupca(kupac);
-            kupac = (KupacEntity) Controller.sacuvaj(kupac);
+            kupac = (KupacEntity) Controller.zapamtiKupca(kupac);
             JOptionPane.showMessageDialog(this, "Uspesno je sacuvan kupac!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -334,6 +334,14 @@ public class FKupac extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtImeActionPerformed
 
+    private void jTxtPrezimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPrezimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtPrezimeActionPerformed
+
+    private void jTxtBrojTelefonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtBrojTelefonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtBrojTelefonaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAzuriraj;
@@ -363,7 +371,7 @@ public class FKupac extends javax.swing.JDialog {
     private void popuniComboZaMesto() {
         try {
             jComboMesto.removeAllItems();
-            List<IDomainEntity> mesta = Controller.vratiSve(new MestoEntity());
+            List<MestoEntity> mesta = Controller.ucitajListuMesta();
             
             for (IDomainEntity mesto : mesta) {
                 if(mesto instanceof MestoEntity)
@@ -375,8 +383,10 @@ public class FKupac extends javax.swing.JDialog {
     }
     
     private void pripremiZaPregled(String kupacJMBG) {
+        System.out.println(kupacJMBG);
         pripremiFormu(FormMode.PREGLED);
         try {
+            System.out.println("aaaaaaaaaa");
             KupacEntity kupac = Controller.nadjiKupcaPoJMBGu(kupacJMBG);
             setTitle("Pregled kupca: " + kupac.getImeKupca());
             

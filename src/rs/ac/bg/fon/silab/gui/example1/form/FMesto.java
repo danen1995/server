@@ -30,17 +30,17 @@ public class FMesto extends javax.swing.JDialog {
     public FMesto(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        popuniComboZaMesto();
-        pripremiZaKreiranje();
-        centrirajFormu();
+//        popuniComboZaMesto();
+//        pripremiZaKreiranje();
+//        centrirajFormu();
     }
     
     public FMesto(java.awt.Frame parent, boolean modal, String kupacJMBG) {
         super(parent, modal);
         initComponents();
-        popuniComboZaMesto();
-        pripremiZaPregled(kupacJMBG);
-        centrirajFormu();
+//        popuniComboZaMesto();
+//        pripremiZaPregled(kupacJMBG);
+//        centrirajFormu();
     }
 
     /**
@@ -180,21 +180,21 @@ public class FMesto extends javax.swing.JDialog {
 
     private void jBtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSacuvajActionPerformed
         try {
-            String jmbg = jTxtPTT.getText().trim();
-            String ime   = jTxtNaziv.getText().trim();
-            String prezime   = jTxtPrezime.getText().trim();
-            String dat = jTxtDatumRodj.getText().trim();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-            Date datumRodj = sdf.parse(dat);
-            String email = jTxtEmail.getText().trim();
-            String brTel = jTxtBrojTelefona.getText().trim();
-            String adresa = jTxtAdresa.getText().trim();
-            MestoEntity mesto = (MestoEntity) jComboMesto.getSelectedItem();
-            KupacEntity kupac = new KupacEntity(jmbg, ime, prezime, datumRodj, email, brTel, adresa, mesto);
-            System.out.println("AvA: "+kupac.toString());
-//            kupac = Controller.sacuvajKupca(kupac);
-            kupac = (KupacEntity) Controller.sacuvaj(kupac);
-            JOptionPane.showMessageDialog(this, "Uspesno je sacuvan kupac!");
+//            String jmbg = jTxtPTT.getText().trim();
+//            String ime   = jTxtNaziv.getText().trim();
+//            String prezime   = jTxtPrezime.getText().trim();
+//            String dat = jTxtDatumRodj.getText().trim();
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+//            Date datumRodj = sdf.parse(dat);
+//            String email = jTxtEmail.getText().trim();
+//            String brTel = jTxtBrojTelefona.getText().trim();
+//            String adresa = jTxtAdresa.getText().trim();
+//            MestoEntity mesto = (MestoEntity) jComboMesto.getSelectedItem();
+//            KupacEntity kupac = new KupacEntity(jmbg, ime, prezime, datumRodj, email, brTel, adresa, mesto);
+//            System.out.println("AvA: "+kupac.toString());
+////            kupac = Controller.sacuvajKupca(kupac);
+//            kupac = (KupacEntity) Controller.sacuvaj(kupac);
+//            JOptionPane.showMessageDialog(this, "Uspesno je sacuvan kupac!");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Kupac nije uspesno sacuvan!");
@@ -202,13 +202,13 @@ public class FMesto extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnSacuvajActionPerformed
 
     private void jBtnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIzmeniActionPerformed
-        pripremiFormu(FormMode.IZMENA);
+//        pripremiFormu(FormMode.IZMENA);
     }//GEN-LAST:event_jBtnIzmeniActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if (Session.getInstance().getMap().containsKey("izabrano_mesto")) {
             MestoEntity mesto = (MestoEntity) Session.getInstance().getMap().get("izabrano_mesto");
-            jComboMesto.setSelectedItem(mesto);
+//            jComboMesto.setSelectedItem(mesto);
         }
     }//GEN-LAST:event_formWindowActivated
 
@@ -246,116 +246,116 @@ public class FMesto extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtPTT;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniComboZaMesto() {
-        try {
-            jComboMesto.removeAllItems();
-            List<IDomainEntity> mesta = Controller.vratiSve(new MestoEntity());
-            
-            for (IDomainEntity mesto : mesta) {
-                if(mesto instanceof MestoEntity)
-                    jComboMesto.addItem((MestoEntity) mesto);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(FMesto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    private void pripremiZaPregled(String kupacJMBG) {
-        pripremiFormu(FormMode.PREGLED);
-        try {
-            KupacEntity kupac = Controller.nadjiKupcaPoJMBGu(kupacJMBG);
-            
-            setTitle("Pregled kupca: " + kupac.getImeKupca());
-            
-            jTxtPTT.setText(kupac.getJmbgKupca());
-            jTxtNaziv.setText(kupac.getImeKupca());
-            jTxtPrezime.setText(kupac.getPrezimeKupca());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String datumRodjenja = sdf.format(kupac.getDatumRodjenja());
-            jTxtDatumRodj.setText(datumRodjenja);
-            jTxtEmail.setText(kupac.getEmail());
-            jTxtBrojTelefona.setText(kupac.getBrojTelefona());
-            jTxtAdresa.setText(kupac.getAdresa());
-            jComboMesto.setSelectedItem(kupac.getMesto());
-        } catch (Exception ex) {
-            Logger.getLogger(FMesto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    private void pripremiZaIzmenu() {
-        pripremiFormu(FormMode.IZMENA);
-    }
-    
-    private void pripremiZaKreiranje() {
-        pripremiFormu(FormMode.KREIRANJE);
-    }
-    
-    void pripremiFormu(FormMode mode) {
-        switch (mode) {
-            case IZMENA:
-                jBtnAzuriraj.setEnabled(true);
-                jBtnIzmeni.setEnabled(false);
-                jBtnSacuvaj.setEnabled(false);
-                jBtnOtkazi.setEnabled(false);
-                jBtnIzaberi.setEnabled(true);
-                
-                jTxtPTT.setVisible(true);
-                jLabelPTT.setVisible(true);
-                jLabelPTT.setEnabled(false);
-                
-                jComboMesto.setEnabled(true);
-                jTxtEmail.setEnabled(true);
-                jTxtPrezime.setEnabled(true);
-                jTxtNaziv.setEnabled(true);
-                jTxtDatumRodj.setEnabled(true);
-                jTxtAdresa.setEnabled(true);
-                jTxtBrojTelefona.setEnabled(true);
-                
-                break;
-            case KREIRANJE:
-                jBtnAzuriraj.setEnabled(false);
-                jBtnIzmeni.setEnabled(false);
-                jBtnSacuvaj.setEnabled(true);
-                jBtnOtkazi.setEnabled(false);
-                jBtnIzaberi.setEnabled(true);
-                
-                jTxtPTT.setVisible(true);
-                jLabelPTT.setVisible(true);
-                
-                jComboMesto.setEnabled(true);
-                jTxtEmail.setEnabled(true);
-                jTxtPrezime.setEnabled(true);
-                jTxtNaziv.setEnabled(true);
-                jTxtDatumRodj.setEnabled(true);
-                jTxtAdresa.setEnabled(true);
-                jTxtBrojTelefona.setEnabled(true);
-                
-                break;
-            case PREGLED:
-                jBtnAzuriraj.setEnabled(false);
-                
-                jBtnIzmeni.setEnabled(true);
-                jBtnSacuvaj.setEnabled(false);
-                jBtnOtkazi.setEnabled(false);
-                jBtnIzaberi.setEnabled(false);
-                
-                jTxtPTT.setVisible(true);
-                jLabelPTT.setVisible(true);
-                jTxtPTT.setEnabled(false);
-                
-                jComboMesto.setEnabled(false);
-                jTxtEmail.setEnabled(false);
-                jTxtPrezime.setEnabled(false);
-                jTxtNaziv.setEnabled(false);
-                jTxtDatumRodj.setEnabled(false);
-                jTxtAdresa.setEnabled(false);
-                jTxtBrojTelefona.setEnabled(false);
-                break;
-        }
-    }
-    
-    private void centrirajFormu() {
-        setLocationRelativeTo(null);
-    }
+//    private void popuniComboZaMesto() {
+//        try {
+//            jComboMesto.removeAllItems();
+//            List<IDomainEntity> mesta = Controller.vratiSve(new MestoEntity());
+//            
+//            for (IDomainEntity mesto : mesta) {
+//                if(mesto instanceof MestoEntity)
+//                    jComboMesto.addItem((MestoEntity) mesto);
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(FMesto.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
+//    private void pripremiZaPregled(String kupacJMBG) {
+//        pripremiFormu(FormMode.PREGLED);
+//        try {
+//            KupacEntity kupac = Controller.nadjiKupcaPoJMBGu(kupacJMBG);
+//            
+//            setTitle("Pregled kupca: " + kupac.getImeKupca());
+//            
+//            jTxtPTT.setText(kupac.getJmbgKupca());
+//            jTxtNaziv.setText(kupac.getImeKupca());
+//            jTxtPrezime.setText(kupac.getPrezimeKupca());
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//            String datumRodjenja = sdf.format(kupac.getDatumRodjenja());
+//            jTxtDatumRodj.setText(datumRodjenja);
+//            jTxtEmail.setText(kupac.getEmail());
+//            jTxtBrojTelefona.setText(kupac.getBrojTelefona());
+//            jTxtAdresa.setText(kupac.getAdresa());
+//            jComboMesto.setSelectedItem(kupac.getMesto());
+//        } catch (Exception ex) {
+//            Logger.getLogger(FMesto.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
+//    private void pripremiZaIzmenu() {
+//        pripremiFormu(FormMode.IZMENA);
+//    }
+//    
+//    private void pripremiZaKreiranje() {
+//        pripremiFormu(FormMode.KREIRANJE);
+//    }
+//    
+//    void pripremiFormu(FormMode mode) {
+//        switch (mode) {
+//            case IZMENA:
+//                jBtnAzuriraj.setEnabled(true);
+//                jBtnIzmeni.setEnabled(false);
+//                jBtnSacuvaj.setEnabled(false);
+//                jBtnOtkazi.setEnabled(false);
+//                jBtnIzaberi.setEnabled(true);
+//                
+//                jTxtPTT.setVisible(true);
+//                jLabelPTT.setVisible(true);
+//                jLabelPTT.setEnabled(false);
+//                
+//                jComboMesto.setEnabled(true);
+//                jTxtEmail.setEnabled(true);
+//                jTxtPrezime.setEnabled(true);
+//                jTxtNaziv.setEnabled(true);
+//                jTxtDatumRodj.setEnabled(true);
+//                jTxtAdresa.setEnabled(true);
+//                jTxtBrojTelefona.setEnabled(true);
+//                
+//                break;
+//            case KREIRANJE:
+//                jBtnAzuriraj.setEnabled(false);
+//                jBtnIzmeni.setEnabled(false);
+//                jBtnSacuvaj.setEnabled(true);
+//                jBtnOtkazi.setEnabled(false);
+//                jBtnIzaberi.setEnabled(true);
+//                
+//                jTxtPTT.setVisible(true);
+//                jLabelPTT.setVisible(true);
+//                
+//                jComboMesto.setEnabled(true);
+//                jTxtEmail.setEnabled(true);
+//                jTxtPrezime.setEnabled(true);
+//                jTxtNaziv.setEnabled(true);
+//                jTxtDatumRodj.setEnabled(true);
+//                jTxtAdresa.setEnabled(true);
+//                jTxtBrojTelefona.setEnabled(true);
+//                
+//                break;
+//            case PREGLED:
+//                jBtnAzuriraj.setEnabled(false);
+//                
+//                jBtnIzmeni.setEnabled(true);
+//                jBtnSacuvaj.setEnabled(false);
+//                jBtnOtkazi.setEnabled(false);
+//                jBtnIzaberi.setEnabled(false);
+//                
+//                jTxtPTT.setVisible(true);
+//                jLabelPTT.setVisible(true);
+//                jTxtPTT.setEnabled(false);
+//                
+//                jComboMesto.setEnabled(false);
+//                jTxtEmail.setEnabled(false);
+//                jTxtPrezime.setEnabled(false);
+//                jTxtNaziv.setEnabled(false);
+//                jTxtDatumRodj.setEnabled(false);
+//                jTxtAdresa.setEnabled(false);
+//                jTxtBrojTelefona.setEnabled(false);
+//                break;
+//        }
+//    }
+//    
+//    private void centrirajFormu() {
+//        setLocationRelativeTo(null);
+//    }
     
 }

@@ -137,7 +137,7 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
      private void popuniTabeluPorudzbina() {
         try {
             List<PorudzbinaEntity> porudzbinaLista=new ArrayList<>();
-            List<IDomainEntity> porudzbine = Controller.vratiSve(new PorudzbinaEntity());
+            List<PorudzbinaEntity> porudzbine = Controller.ucitajPorudzbine();
             for (IDomainEntity iDomainEntity : porudzbine) {
                 porudzbinaLista.add((PorudzbinaEntity)iDomainEntity);
                 System.out.println(iDomainEntity);

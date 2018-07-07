@@ -154,7 +154,7 @@ public class FIzaberiMesto extends javax.swing.JDialog {
 
     private void popuniTabeluMesta() {
         try {
-            List<MestoEntity> mesta = Controller.vratiSvaMesta();
+            List<MestoEntity> mesta = Controller.ucitajListuMesta();
 
             TableModel tm = new MestoTableModel(mesta);
             jTblMesta.setModel(tm);

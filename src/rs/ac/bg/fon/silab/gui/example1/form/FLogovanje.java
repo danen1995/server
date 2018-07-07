@@ -120,7 +120,7 @@ public class FLogovanje extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLogovanjeActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-//        odjava();
+       System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
    
