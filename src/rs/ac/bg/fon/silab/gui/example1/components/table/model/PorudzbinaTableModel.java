@@ -16,7 +16,7 @@ import rs.ac.bg.fon.silab.jdbc.example1.domen.StavkaPorudzbineEntity;
  * @author FON
  */
 public class PorudzbinaTableModel extends AbstractTableModel {
-
+    boolean mogucnostIzmene=false;
     private final PorudzbinaEntity porudzbina;
     private String[] columnNames = new String[]{"RBR stavke", "Proizvod", "Kolicina(kom.)", "Vrednost"};
 
@@ -30,7 +30,8 @@ public class PorudzbinaTableModel extends AbstractTableModel {
 //            return true;
 //        }
 //        return false;
-
+        if(mogucnostIzmene==false) return false;
+        else
         return (columnIndex == 1 || columnIndex == 2);
     }
 
@@ -143,4 +144,15 @@ public class PorudzbinaTableModel extends AbstractTableModel {
     public PorudzbinaEntity vratiPorudzbinu() {
         return porudzbina;
     }
+    
+    public void setujStavkamaIDPorudzbine(){
+        for (StavkaPorudzbineEntity stavka : porudzbina.getStavke()) {
+            stavka.setPorudzbina(porudzbina);
+        }
+    }
+    
+    public void omoguciIzmenu(boolean mogucnostIzmene){
+        this.mogucnostIzmene=mogucnostIzmene;
+    }
+    
 }

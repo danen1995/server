@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.silab.gui.example1.form;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -219,22 +220,21 @@ public class FProizvod extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIzmeniActionPerformed
 
     private void jBtnIzaberiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIzaberiActionPerformed
-//        JDialog fIzaberiMesto = new FIzaberiMesto(null, true);
-//        fIzaberiMesto.setVisible(rootPaneCheckingEnabled);
+        JDialog fIzaberiTip = new FIzaberiTipProizvoda(null, true);
+        fIzaberiTip.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jBtnIzaberiActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if (Session.getInstance().getMap().containsKey("izabrano_mesto")) {
-            MestoEntity mesto = (MestoEntity) Session.getInstance().getMap().get("izabrano_mesto");
-            jComboTipProizvoda.setSelectedItem(mesto);
+        if (Session.getInstance().getMap().containsKey("izabraniTipProizvoda")) {
+            TipProizvodaEntity tip = (TipProizvodaEntity) Session.getInstance().getMap().get("izabraniTipProizvoda");
+            jComboTipProizvoda.setSelectedItem(tip);
         }
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        if (Session.getInstance().getMap().containsKey("izabrano_mesto")){
-            Session.getInstance().getMap().remove("izabrano_mesto");
-            JOptionPane.showMessageDialog(null, "Uklanjanje izabranog grada iz sesije");
+        if (Session.getInstance().getMap().containsKey("izabraniTipProizvoda")){
+            Session.getInstance().getMap().remove("izabraniTipProizvoda");
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -357,6 +357,8 @@ public class FProizvod extends javax.swing.JDialog {
                 jTxtNaziv.setVisible(true);
                 jLabelNaziv.setVisible(true);
                 jTxtNaziv.setEnabled(false);
+                jTxtNaziv.setDisabledTextColor(Color.DARK_GRAY);
+                jTxtCena.setDisabledTextColor(Color.DARK_GRAY);
                 
                 jComboTipProizvoda.setEnabled(false);
                 jTxtNaziv.setEnabled(false);

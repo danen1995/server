@@ -27,26 +27,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuMesto">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Mesto"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemKreirajMesto">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kreiraj"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemKreirajMestoActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPretraziMesta">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Pretrazi"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuProizvod">
           <Properties>
             <Property name="text" type="java.lang.String" value="Proizvod"/>

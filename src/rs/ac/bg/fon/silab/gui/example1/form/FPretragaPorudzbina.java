@@ -120,6 +120,7 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
 
             JDialog fPacijent = new FPorudzbina(null, true, idPor);
             fPacijent.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Sistem ne moze da nadje podatke o izabranoj porudzbini.");
         }
@@ -140,10 +141,6 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
             List<PorudzbinaEntity> porudzbine = Controller.ucitajPorudzbine();
             for (IDomainEntity iDomainEntity : porudzbine) {
                 porudzbinaLista.add((PorudzbinaEntity)iDomainEntity);
-                System.out.println(iDomainEntity);
-            }
-            for (PorudzbinaEntity pl : porudzbinaLista) {
-                System.out.println(pl);
             }
             TableModel tm = new PorudzbineTableModel(porudzbinaLista);
             jTablePorudzbine.setModel(tm);
@@ -163,7 +160,7 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
                 String filterCity = jTextFieldKriterijum.getText();
 
                 if (filterCity.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
+                    rowSorter.setRowFilter(null); 
                 } else {
                     rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + filterCity));
                 }

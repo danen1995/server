@@ -5,18 +5,23 @@
  */
 package rs.ac.bg.fon.silab.gui.example1.form;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import rs.ac.bg.fon.silab.gui.example1.components.table.model.PorudzbineTableModel;
 import rs.ac.bg.fon.silab.gui.example1.controller.Controller;
 import rs.ac.bg.fon.silab.gui.example1.session.Session;
 import rs.ac.bg.fon.silab.jdbc.example1.domen.IDomainEntity;
 import rs.ac.bg.fon.silab.jdbc.example1.domen.KupacEntity;
 import rs.ac.bg.fon.silab.jdbc.example1.domen.MestoEntity;
+import rs.ac.bg.fon.silab.jdbc.example1.domen.PorudzbinaEntity;
 
 /**
  *
@@ -41,6 +46,7 @@ public class FKupac extends javax.swing.JDialog {
         popuniComboZaMesto();
         System.out.println(kupacJMBG);
         pripremiZaPregled(kupacJMBG);
+        postaviModel(kupacJMBG);
         centrirajFormu();
     }
 
@@ -75,6 +81,9 @@ public class FKupac extends javax.swing.JDialog {
         jBtnAzuriraj = new javax.swing.JButton();
         jBtnIzmeni = new javax.swing.JButton();
         jBtnOtkazi = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePorudzbineZaKupca = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novi kupac");
@@ -150,13 +159,15 @@ public class FKupac extends javax.swing.JDialog {
                     .addComponent(jTxtDatumRodj)
                     .addComponent(jTxtIme)
                     .addComponent(jTxtPrezime)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboMesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnIzaberi))
                     .addComponent(jTxtJMBG)
                     .addComponent(jTxtBrojTelefona)
-                    .addComponent(jTxtAdresa))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboMesto, 0, 452, Short.MAX_VALUE)
+                            .addComponent(jTxtAdresa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnIzaberi)
+                        .addGap(139, 139, 139)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,14 +198,18 @@ public class FKupac extends javax.swing.JDialog {
                     .addComponent(jLabelBrTel)
                     .addComponent(jTxtBrojTelefona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAdresa)
-                    .addComponent(jTxtAdresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelMesto)
-                    .addComponent(jComboMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnIzaberi)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelAdresa)
+                            .addComponent(jTxtAdresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelMesto)
+                            .addComponent(jComboMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBtnIzaberi)
+                        .addContainerGap())))
         );
 
         jBtnSacuvaj.setText("Sacuvaj");
@@ -225,6 +240,30 @@ public class FKupac extends javax.swing.JDialog {
             }
         });
 
+        jTablePorudzbineZaKupca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePorudzbineZaKupca);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,13 +272,15 @@ public class FKupac extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 458, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jBtnOtkazi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnAzuriraj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnIzmeni)
-                        .addGap(1, 1, 1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnSacuvaj)))
                 .addContainerGap())
         );
@@ -247,13 +288,18 @@ public class FKupac extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnSacuvaj)
-                    .addComponent(jBtnAzuriraj)
-                    .addComponent(jBtnIzmeni)
-                    .addComponent(jBtnOtkazi))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBtnOtkazi)
+                            .addComponent(jBtnAzuriraj)
+                            .addComponent(jBtnIzmeni)
+                            .addComponent(jBtnSacuvaj))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -302,7 +348,6 @@ public class FKupac extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (Session.getInstance().getMap().containsKey("izabrano_mesto")){
             Session.getInstance().getMap().remove("izabrano_mesto");
-            JOptionPane.showMessageDialog(null, "Uklanjanje izabranog grada iz sesije");
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -359,6 +404,9 @@ public class FKupac extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelMesto;
     private javax.swing.JLabel jLabelPrezime;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablePorudzbineZaKupca;
     private javax.swing.JTextField jTxtAdresa;
     private javax.swing.JTextField jTxtBrojTelefona;
     private javax.swing.JTextField jTxtDatumRodj;
@@ -416,6 +464,7 @@ public class FKupac extends javax.swing.JDialog {
     void pripremiFormu(FormMode mode) {
         switch (mode) {
             case IZMENA:
+                jPanel2.setVisible(false);
                 jBtnAzuriraj.setEnabled(true);
                 jBtnIzmeni.setEnabled(false);
                 jBtnSacuvaj.setEnabled(false);
@@ -436,6 +485,7 @@ public class FKupac extends javax.swing.JDialog {
                 
                 break;
             case KREIRANJE:
+                jPanel2.setVisible(false);
                 jBtnAzuriraj.setEnabled(false);
                 jBtnIzmeni.setEnabled(false);
                 jBtnSacuvaj.setEnabled(true);
@@ -455,6 +505,7 @@ public class FKupac extends javax.swing.JDialog {
                 
                 break;
             case PREGLED:
+                jPanel2.setVisible(true);
                 jBtnAzuriraj.setEnabled(false);
                 
                 jBtnIzmeni.setEnabled(true);
@@ -465,14 +516,22 @@ public class FKupac extends javax.swing.JDialog {
                 jTxtJMBG.setVisible(true);
                 jLabelJMBG.setVisible(true);
                 jTxtJMBG.setEnabled(false);
+                jTxtJMBG.setDisabledTextColor(Color.DARK_GRAY);
                 
                 jComboMesto.setEnabled(false);
+                jComboMesto.setForeground(Color.DARK_GRAY);
                 jTxtEmail.setEnabled(false);
+                jTxtEmail.setDisabledTextColor(Color.DARK_GRAY);
                 jTxtPrezime.setEnabled(false);
+                jTxtPrezime.setDisabledTextColor(Color.DARK_GRAY);
+                jTxtIme.setDisabledTextColor(Color.DARK_GRAY);
                 jTxtIme.setEnabled(false);
                 jTxtDatumRodj.setEnabled(false);
+                jTxtDatumRodj.setDisabledTextColor(Color.DARK_GRAY);
                 jTxtAdresa.setEnabled(false);
+                jTxtAdresa.setDisabledTextColor(Color.DARK_GRAY);
                 jTxtBrojTelefona.setEnabled(false);
+                jTxtBrojTelefona.setDisabledTextColor(Color.DARK_GRAY);
                 break;
         }
     }
@@ -480,5 +539,21 @@ public class FKupac extends javax.swing.JDialog {
     private void centrirajFormu() {
         setLocationRelativeTo(null);
     }
+
+    private void postaviModel(String kupacJMBG) {
+        try {
+            List<PorudzbinaEntity> porudzbinaLista=new ArrayList<>();
+            List<PorudzbinaEntity> porudzbine = Controller.ucitajPorudzbineZaKupca(kupacJMBG);
+            for (IDomainEntity iDomainEntity : porudzbine) {
+                porudzbinaLista.add((PorudzbinaEntity)iDomainEntity);
+            }
+            TableModel tm = new PorudzbineTableModel(porudzbinaLista);
+            jTablePorudzbineZaKupca.setModel(tm);
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaPorudzbina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
 }

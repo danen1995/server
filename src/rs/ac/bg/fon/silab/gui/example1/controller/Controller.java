@@ -484,7 +484,7 @@ public class Controller {
     public static List<PorudzbinaEntity> ucitajPorudzbine() throws Exception{
         RequestObject request = new RequestObject();
         request.setOperation(IOperation.VRATI_SVE_PORUDZBINE);
-        request.setData(new KupacEntity());
+        request.setData(new PorudzbinaEntity());
         Socket socket = Session.getInstance().getSocket();
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         out.writeObject(request);
@@ -498,6 +498,83 @@ public class Controller {
             return (List<PorudzbinaEntity>) response.getData();
         } else {
             throw new Exception("Greska u komunikaciji!");
+        }
+    }
+
+    public static List<RadnikEntity> ucitajRadnike() throws Exception{
+        RequestObject request = new RequestObject();
+        request.setOperation(IOperation.VRATI_SVE_RADNIKE);
+        request.setData(new RadnikEntity());
+        Socket socket = Session.getInstance().getSocket();
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(request);
+        out.flush();
+
+        //Sacekaj odgovor
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ResponseObject response = (ResponseObject) in.readObject();
+        int code = response.getCode();
+        if (code == IStatus.OK) {
+            return (List<RadnikEntity>) response.getData();
+        } else {
+            throw new Exception("Greska u komunikaciji!");
+        }
+    }
+
+    public static void izmeniStavke(List<StavkaPorudzbineEntity> stavke) throws Exception{
+        RequestObject request = new RequestObject();
+        request.setOperation(IOperation.IZMENI_STAVKE);
+        request.setData(stavke);
+        Socket socket = Session.getInstance().getSocket();
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(request);
+        out.flush();
+
+        //Sacekaj odgovor
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ResponseObject response = (ResponseObject) in.readObject();
+        int code = response.getCode();
+        if (code != IStatus.OK) {
+            throw new Exception("Greska u komunikaciji!");
+        }
+    }
+
+    public static List<PorudzbinaEntity> ucitajPorudzbineZaKupca(String kupacJMBG) throws Exception{
+        RequestObject request = new RequestObject();
+        request.setOperation(IOperation.VRATI_SVE_PORUDZBINE_ZA_KUPCA);
+        request.setData(kupacJMBG);
+        Socket socket = Session.getInstance().getSocket();
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(request);
+        out.flush();
+
+        //Sacekaj odgovor
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ResponseObject response = (ResponseObject) in.readObject();
+        int code = response.getCode();
+        if (code == IStatus.OK) {
+            return (List<PorudzbinaEntity>) response.getData();
+        } else {
+            throw new Exception("Greska u komunikaciji!");
+        }
+    }
+
+    public static TipProizvodaEntity vratiTipProizvodaPoIDu(Long id) throws Exception{
+         RequestObject request = new RequestObject();
+        request.setOperation(IOperation.VRATI_TIPOVE_PROIZVODA_PO_ID);
+        request.setData(id);
+        Socket socket = Session.getInstance().getSocket();
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(request);
+        out.flush();
+
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ResponseObject response = (ResponseObject) in.readObject();
+        int code = response.getCode();
+        if (code == IStatus.OK) {
+            return (TipProizvodaEntity) response.getData();
+        } else {
+            throw new Exception("Error in communication!");
         }
     }
      

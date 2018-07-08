@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.silab.gui.example1.form;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,6 +38,7 @@ import rs.ac.bg.fon.silab.jdbc.example1.domen.StavkaPorudzbineEntity;
  */
 public class FPorudzbina extends javax.swing.JDialog {
     RadnikEntity radnik;
+    boolean mogucnostIzmenePorudzbine = false;
     /**
      * Creates new form FBill
      */
@@ -54,7 +56,9 @@ public class FPorudzbina extends javax.swing.JDialog {
         initComponents();
 //        postaviModel();
         centrirajFormu();
-//        popuniComboZaKupca();
+        popuniComboZaKupca();
+        popuniComboZaRadnika();
+        jTextFieldIdPorudzbine.setText(id.toString());
         pripremiZaPregled(id);
     }
 
@@ -68,7 +72,6 @@ public class FPorudzbina extends javax.swing.JDialog {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jbtnIzaberiKupca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblStavkePorudzbine = new javax.swing.JTable();
         jbtnObrisiStavku = new javax.swing.JButton();
@@ -113,13 +116,6 @@ public class FPorudzbina extends javax.swing.JDialog {
             }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
-            }
-        });
-
-        jbtnIzaberiKupca.setText("Izaberi");
-        jbtnIzaberiKupca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnIzaberiKupcaActionPerformed(evt);
             }
         });
 
@@ -213,7 +209,7 @@ public class FPorudzbina extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextFieldIdPorudzbine, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextFieldIdPorudzbine, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,51 +226,46 @@ public class FPorudzbina extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(58, 58, 58)
+                .addComponent(jBtnOtkazi)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnAzuriraj)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnIzmeni)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnSacuvaj)
+                .addGap(0, 346, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jBtnOtkazi)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnAzuriraj)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnIzmeni)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnSacuvaj)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldDatumPor, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldDatumPor, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelUkIznos)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabelKupac))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelUkIznos)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabelKupac))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                                .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(7, 7, 7)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jtxtUkupanIznos, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jComboBoxKupac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jComboBoxRadnik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtnIzaberiKupca)
-                .addGap(48, 48, 48))
+                                            .addComponent(jtxtUkupanIznos, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jComboBoxKupac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxRadnik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(119, 119, 119))
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnDodajStavku)
@@ -284,13 +275,13 @@ public class FPorudzbina extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUkIznos)
                     .addComponent(jtxtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnDodajStavku)
@@ -300,8 +291,7 @@ public class FPorudzbina extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelKupac)
-                            .addComponent(jComboBoxKupac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnIzaberiKupca))
+                            .addComponent(jComboBoxKupac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -317,21 +307,17 @@ public class FPorudzbina extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnAzuriraj)
-                    .addComponent(jBtnIzmeni)
-                    .addComponent(jbtnSacuvaj)
-                    .addComponent(jBtnOtkazi))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnAzuriraj)
+                        .addComponent(jbtnSacuvaj)
+                        .addComponent(jBtnOtkazi))
+                    .addComponent(jBtnIzmeni))
                 .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbtnIzaberiKupcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzaberiKupcaActionPerformed
-//        JDialog selectCompanyForm = new FSelectCompany(null, true);
-//        selectCompanyForm.setVisible(true);
-    }//GEN-LAST:event_jbtnIzaberiKupcaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 //        if (Session.getInstance().getMap().containsKey("selected_company")) {
@@ -373,22 +359,10 @@ public class FPorudzbina extends javax.swing.JDialog {
             porudzbina.setStatus("U pripremi");
             porudzbina.setUkupanIznos(Double.parseDouble(jtxtUkupanIznos.getText().toString()));
             porudzbina.setKupac((KupacEntity)jComboBoxKupac.getSelectedItem());
-//            if (Session.getInstance().getMap().containsKey("selected_company")) {
-//                billEntity.setCompanyEntity((CompanyEntity) 
-//                        Session.getInstance().getMap().get("selected_company")
-//                );
-                IDomainEntity ide = Controller.zapamtiPorudzbinu(porudzbina);
-                porudzbina = (PorudzbinaEntity) ide;
-                for (StavkaPorudzbineEntity stavka : porudzbina.getStavke()) {
-                    stavka.setPorudzbina(porudzbina);
-                    System.out.println(porudzbina);
-                    Controller.zapamtiStavku(stavka);
-                }
-                JOptionPane.showMessageDialog(this, "Porudzbina je sacuvana.");
-//            } else {
-//                throw new Exception("Please select company");
-//            }
-
+            ptm.setujStavkamaIDPorudzbine();
+            Controller.zapamtiPorudzbinu(porudzbina);
+            JOptionPane.showMessageDialog(this, "Porudzbina je sacuvana.");
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Greska: " + e.getMessage());
         }
@@ -419,22 +393,36 @@ public class FPorudzbina extends javax.swing.JDialog {
         try {
             Long idPor = Long.parseLong(jTextFieldIdPorudzbine.getText().trim());
             Double ukIznos = Double.parseDouble(jtxtUkupanIznos.getText().trim());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Date datumPor = sdf.parse(jTextFieldDatumPor.getText());
+            java.util.Date datumPor = java.sql.Date.valueOf(LocalDate.now());
             String status = jTextFieldStatus.getText().trim();
             KupacEntity kupac = (KupacEntity) jComboBoxKupac.getSelectedItem();
             RadnikEntity radnik = (RadnikEntity) jComboBoxRadnik.getSelectedItem();
             PorudzbinaEntity porudzbina = new PorudzbinaEntity(idPor, datumPor, status, ukIznos, kupac, radnik);
             porudzbina = (PorudzbinaEntity) Controller.izmeniPorudzbinu(porudzbina);
+            PorudzbinaTableModel tableModel = (PorudzbinaTableModel) jtblStavkePorudzbine.getModel();
+            List<StavkaPorudzbineEntity> stavke = tableModel.vratiPorudzbinu().getStavke();
+            for (StavkaPorudzbineEntity stavkaPorudzbineEntity : stavke) {
+                stavkaPorudzbineEntity.setPorudzbina(porudzbina);
+            }
+            Controller.izmeniStavke(stavke);
             JOptionPane.showMessageDialog(this, "Sistem je azurirao porudzbinu");
+            dispose();
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Sistem ne moze da azurira porudzbinu");
             Logger.getLogger(FKupac.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnAzurirajActionPerformed
 
     private void jBtnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIzmeniActionPerformed
-        pripremiFormu(FormMode.IZMENA);
+        if(mogucnostIzmenePorudzbine==true){
+            pripremiFormu(FormMode.IZMENA);
+            PorudzbinaTableModel tableModel = (PorudzbinaTableModel) jtblStavkePorudzbine.getModel();
+            tableModel.omoguciIzmenu(true);
+        }else {
+            JOptionPane.showMessageDialog(this, "Porudzbina je vec poslata ili dostavljena. Ne moze da se menja!");
+            return;
+        }
     }//GEN-LAST:event_jBtnIzmeniActionPerformed
 
     private void centrirajFormu() {
@@ -460,7 +448,6 @@ public class FPorudzbina extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldIdPorudzbine;
     private javax.swing.JTextField jTextFieldStatus;
     private javax.swing.JButton jbtnDodajStavku;
-    private javax.swing.JButton jbtnIzaberiKupca;
     private javax.swing.JButton jbtnObrisiStavku;
     private javax.swing.JButton jbtnSacuvaj;
     private javax.swing.JTable jtblStavkePorudzbine;
@@ -504,15 +491,20 @@ public class FPorudzbina extends javax.swing.JDialog {
         pripremiFormu(FormMode.PREGLED);
         try {
             PorudzbinaEntity por = Controller.nadjiPorudzbinuPoIDu(id);
+            if(por.getStatus().equals("U pripremi")){
+                mogucnostIzmenePorudzbine = true;
+            }
             List<StavkaPorudzbineEntity> stavke = Controller.vratiStavkeZaPorudzbinu(id);
             por.setStavke(stavke);
-//            System.out.println("----------------------------");
-//            for (StavkaPorudzbineEntity stavkaPorudzbineEntity : por.getStavke()) {
-//                System.out.println(stavkaPorudzbineEntity);
-//            }
             setTitle("Pregled porudzbine: " + por.getIdPorudzbine());
-            TableModel billTableModel = new PorudzbinaTableModel(por);
-            jtblStavkePorudzbine.setModel(billTableModel);
+            PorudzbinaTableModel tableModel = new PorudzbinaTableModel(por);
+            jtblStavkePorudzbine.setModel(tableModel);
+            tableModel.omoguciIzmenu(false);
+            List<ProizvodEntity> proizvodi = Controller.ucitajProizvode();
+            JComboBox comboBox = new JComboBox(new DefaultComboBoxModel(proizvodi.toArray()));
+            
+            TableColumn kolonaProizvod = jtblStavkePorudzbine.getColumnModel().getColumn(1);
+            kolonaProizvod.setCellEditor(new DefaultCellEditor(comboBox));
             
             jtxtUkupanIznos.setText(por.getUkupanIznos().toString());
             jComboBoxKupac.setSelectedItem(por.getKupac());
@@ -534,76 +526,65 @@ public class FPorudzbina extends javax.swing.JDialog {
                 jBtnIzmeni.setEnabled(false);
                 jbtnSacuvaj.setEnabled(false);
                 jBtnOtkazi.setEnabled(false);
-                jbtnIzaberiKupca.setEnabled(true);
                 jPanel1.setVisible(true);
                 jPanel1.setEnabled(false);
-//                
-//                jTxtJMBG.setVisible(true);
-//                jLabelJMBG.setVisible(true);
-//                jLabelJMBG.setEnabled(false);
-//                
-//                jComboMesto.setEnabled(true);
-//                jTxtEmail.setEnabled(true);
-//                jTxtPrezime.setEnabled(true);
-//                jTxtIme.setEnabled(true);
-//                jTxtDatumRodj.setEnabled(true);
-//                jTxtAdresa.setEnabled(true);
-//                jTxtBrojTelefona.setEnabled(true);
-//                
+                jComboBoxKupac.setEnabled(true);
+                jComboBoxRadnik.setEnabled(true);
+                jbtnDodajStavku.setEnabled(true);
+                jbtnObrisiStavku.setEnabled(true);
+                jTextFieldStatus.setEnabled(false);
+                jTextFieldStatus.setDisabledTextColor(Color.DARK_GRAY);
+                jTextFieldDatumPor.setText(LocalDate.now().toString());
+                jTextFieldDatumPor.setEnabled(false);
+                jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 break;
             case KREIRANJE:
                 java.util.Date date = java.sql.Date.valueOf(LocalDate.now());
                 jTextFieldDatumPor.setText(date.toString());
                 jTextFieldStatus.setText("U pripremi");
                 jTextFieldStatus.setEnabled(false);
+                jTextFieldStatus.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldDatumPor.setEnabled(false);
+                jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldIdPorudzbine.setEnabled(false);
+                jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 jPanel1.setVisible(false);
                 jBtnAzuriraj.setEnabled(false);
                 jBtnIzmeni.setEnabled(false);
                 jbtnSacuvaj.setEnabled(true);
                 jBtnOtkazi.setEnabled(false);
-                jbtnIzaberiKupca.setEnabled(true);
-//                
-//                jTxtJMBG.setVisible(true);
-//                jLabelJMBG.setVisible(true);
-//                
-//                jComboMesto.setEnabled(true);
-//                jTxtEmail.setEnabled(true);
-//                jTxtPrezime.setEnabled(true);
-//                jTxtIme.setEnabled(true);
-//                jTxtDatumRodj.setEnabled(true);
-//                jTxtAdresa.setEnabled(true);
-//                jTxtBrojTelefona.setEnabled(true);
-//                
                 break;
             case PREGLED:
-//                    jPanel1.setVisible(true);
-//                jBtnAzuriraj.setEnabled(false);
-//                
-//                jBtnIzmeni.setEnabled(true);
-//                jBtnSacuvaj.setEnabled(false);
-//                jBtnOtkazi.setEnabled(false);
-//                jBtnIzaberi.setEnabled(false);
-//                
-//                jTxtJMBG.setVisible(true);
-//                jLabelJMBG.setVisible(true);
-//                jTxtJMBG.setEnabled(false);
-//                
-//                jComboMesto.setEnabled(false);
-//                jTxtEmail.setEnabled(false);
-//                jTxtPrezime.setEnabled(false);
-//                jTxtIme.setEnabled(false);
-//                jTxtDatumRodj.setEnabled(false);
-//                jTxtAdresa.setEnabled(false);
-//                jTxtBrojTelefona.setEnabled(false);
-                  jBtnAzuriraj.setEnabled(false);
-                  jbtnSacuvaj.setEnabled(false);
-                  jbtnDodajStavku.setEnabled(false);
-                  jbtnObrisiStavku.setEnabled(false);
-                  jbtnIzaberiKupca.setEnabled(false);
-                  jPanel1.setVisible(true);
+                jComboBoxKupac.setEnabled(false);
+                jComboBoxRadnik.setEnabled(false);
+                jBtnAzuriraj.setEnabled(false);
+                jbtnSacuvaj.setEnabled(false);
+                jbtnDodajStavku.setEnabled(false);
+                jbtnObrisiStavku.setEnabled(false);
+                jBtnIzmeni.setEnabled(true);
+                jPanel1.setVisible(true);
+                jPanel1.setEnabled(false);
+                jTextFieldDatumPor.setEnabled(false);
+                jTextFieldStatus.setEnabled(false);
+                jTextFieldIdPorudzbine.setEnabled(false);
+                jTextFieldStatus.setDisabledTextColor(Color.DARK_GRAY);
+                jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
+                jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 break;
+        }
+    }
+
+    private void popuniComboZaRadnika() {
+        try {
+            jComboBoxRadnik.removeAllItems();
+            List<RadnikEntity> radnici = Controller.ucitajRadnike();
+            
+            for (IDomainEntity radnik : radnici) {
+                if(radnik instanceof RadnikEntity)
+                    jComboBoxRadnik.addItem((RadnikEntity) radnik);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FPorudzbina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

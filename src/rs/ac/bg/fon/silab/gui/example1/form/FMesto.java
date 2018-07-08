@@ -208,7 +208,7 @@ public class FMesto extends javax.swing.JDialog {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if (Session.getInstance().getMap().containsKey("izabrano_mesto")) {
             MestoEntity mesto = (MestoEntity) Session.getInstance().getMap().get("izabrano_mesto");
-//            jComboMesto.setSelectedItem(mesto);
+//            jc.setSelectedItem(mesto);
         }
     }//GEN-LAST:event_formWindowActivated
 

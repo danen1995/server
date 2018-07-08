@@ -65,5 +65,15 @@ public class KupacTableModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    
+     public void osvezi() {
+        fireTableDataChanged();
+    }
+     public void obrisi(int selektovaniRed) {
+        kupci.remove(selektovaniRed);
+        fireTableDataChanged();
+    }
+     
+     public KupacEntity vrati(int red) {
+        return kupci.get(red);
+    }
 }

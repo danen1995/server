@@ -45,9 +45,6 @@ public class FMain1 extends javax.swing.JDialog {
         jMenuKupac = new javax.swing.JMenu();
         jMenuItemKreirajKupca = new javax.swing.JMenuItem();
         jMenuItemPretraziKupce = new javax.swing.JMenuItem();
-        jMenuMesto = new javax.swing.JMenu();
-        jMenuItemKreirajMesto = new javax.swing.JMenuItem();
-        jMenuItemPretraziMesta = new javax.swing.JMenuItem();
         jMenuProizvod = new javax.swing.JMenu();
         jMenuItemKreirajProizvod = new javax.swing.JMenuItem();
         jMenuItemPretraziProizvode = new javax.swing.JMenuItem();
@@ -86,21 +83,6 @@ public class FMain1 extends javax.swing.JDialog {
         jMenuKupac.add(jMenuItemPretraziKupce);
 
         jMenuBar1.add(jMenuKupac);
-
-        jMenuMesto.setText("Mesto");
-
-        jMenuItemKreirajMesto.setText("Kreiraj");
-        jMenuItemKreirajMesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemKreirajMestoActionPerformed(evt);
-            }
-        });
-        jMenuMesto.add(jMenuItemKreirajMesto);
-
-        jMenuItemPretraziMesta.setText("Pretrazi");
-        jMenuMesto.add(jMenuItemPretraziMesta);
-
-        jMenuBar1.add(jMenuMesto);
 
         jMenuProizvod.setText("Proizvod");
 
@@ -198,10 +180,6 @@ public class FMain1 extends javax.swing.JDialog {
         odjava();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuItemKreirajMestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKreirajMestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemKreirajMestoActionPerformed
-
     private void jMenuItemKreirajProizvodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKreirajProizvodActionPerformed
         JDialog fProizvod = new FProizvod(this, true);
         fProizvod.setVisible(true);
@@ -233,15 +211,12 @@ public class FMain1 extends javax.swing.JDialog {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAuthor;
     private javax.swing.JMenuItem jMenuItemKreirajKupca;
-    private javax.swing.JMenuItem jMenuItemKreirajMesto;
     private javax.swing.JMenuItem jMenuItemKreirajPorudzbinu;
     private javax.swing.JMenuItem jMenuItemKreirajProizvod;
     private javax.swing.JMenuItem jMenuItemPretraziKupce;
-    private javax.swing.JMenuItem jMenuItemPretraziMesta;
     private javax.swing.JMenuItem jMenuItemPretraziPorudzbine;
     private javax.swing.JMenuItem jMenuItemPretraziProizvode;
     private javax.swing.JMenu jMenuKupac;
-    private javax.swing.JMenu jMenuMesto;
     private javax.swing.JMenu jMenuPorudzbina;
     private javax.swing.JMenu jMenuProizvod;
     // End of variables declaration//GEN-END:variables

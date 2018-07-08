@@ -58,5 +58,17 @@ public class ProizvodTableModel extends AbstractTableModel {
         return columnNames[column];
     }
 
+    public ProizvodEntity vrati(int x) {
+        return proizvodi.get(x);
+    }
+
+    public void obrisi(int selektovaniRed) {
+        proizvodi.remove(selektovaniRed);
+        fireTableDataChanged();
+    }
+
+    public void osvezi() {
+        fireTableDataChanged();
+    }
     
 }

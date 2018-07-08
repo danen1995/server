@@ -52,6 +52,7 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
         jButtonDetalji = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldKriterijum = new javax.swing.JTextField();
+        jButtonObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,6 +75,13 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
 
         jLabel1.setText("Unesi kriterijum pretrage:");
 
+        jButtonObrisi.setText("Obrisi");
+        jButtonObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,8 +91,11 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonDetalji))
+                .addContainerGap()
+                .addComponent(jButtonObrisi)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonDetalji)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
@@ -102,7 +113,9 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonDetalji)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDetalji)
+                    .addComponent(jButtonObrisi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -122,21 +135,44 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonDetaljiActionPerformed
 
+    private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
+        ProizvodTableModel model = (ProizvodTableModel) jTableProizvodi.getModel();
+        int selektovaniRed = jTableProizvodi.getSelectedRow();
+        selektovaniRed = jTableProizvodi.convertRowIndexToModel(selektovaniRed);
+        if (selektovaniRed != -1) {
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da obrisete proizvod?");
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                try {
+                    boolean obrisan = Controller.obrisiProizvod(model.vrati(selektovaniRed));
+                    model.obrisi(selektovaniRed);
+                    if (obrisan) {
+                        JOptionPane.showMessageDialog(null, "Sistem je uspesno obrisao proizvod.");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Sistem ne moze da obrise proizvod zato sto postoje porudzbine koje sadrze taj proizvod.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Izaberite proizvod koju zelite da obrisete.");
+        }
+    }//GEN-LAST:event_jButtonObrisiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDetalji;
+    private javax.swing.JButton jButtonObrisi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProizvodi;
     private javax.swing.JTextField jTextFieldKriterijum;
     // End of variables declaration//GEN-END:variables
 
-     private void popuniTabeluProizvoda() {
+    private void popuniTabeluProizvoda() {
         try {
-            List<ProizvodEntity> proizvodiLista=new ArrayList<>();
+            List<ProizvodEntity> proizvodiLista = new ArrayList<>();
             List<ProizvodEntity> proizvodi = Controller.ucitajProizvode();
             for (IDomainEntity iDomainEntity : proizvodi) {
-                proizvodiLista.add((ProizvodEntity)iDomainEntity);
+                proizvodiLista.add((ProizvodEntity) iDomainEntity);
             }
             TableModel tm = new ProizvodTableModel(proizvodiLista);
             jTableProizvodi.setModel(tm);
@@ -145,7 +181,7 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
         }
     }
 
-     private void pripremiZaPretragu() {
+    private void pripremiZaPretragu() {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(jTableProizvodi.getModel());
         jTableProizvodi.setRowSorter(rowSorter);
 
@@ -179,6 +215,9 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
             }
         });
     }
-    
-    
+
+    private void osveziTabelu() {
+        ProizvodTableModel model = (ProizvodTableModel) jTableProizvodi.getModel();
+        model.osvezi();
+    }
 }
