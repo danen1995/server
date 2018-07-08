@@ -49,12 +49,12 @@ public class FPorudzbina extends javax.swing.JDialog {
         postaviModel();
         centrirajFormu();
         popuniComboZaKupca();
+        popuniComboZaRadnika();
         pripremiFormu(FormMode.KREIRANJE);
     }
     public FPorudzbina(java.awt.Frame parent, boolean modal,Long id) {
         super(parent, modal);
         initComponents();
-//        postaviModel();
         centrirajFormu();
         popuniComboZaKupca();
         popuniComboZaRadnika();
@@ -108,7 +108,7 @@ public class FPorudzbina extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Create new bill");
+        setTitle("Kreiraj porudzbinu");
         setMaximumSize(new java.awt.Dimension(2147483, 2147483));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -306,30 +306,22 @@ public class FPorudzbina extends javax.swing.JDialog {
                             .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnAzuriraj)
-                        .addComponent(jbtnSacuvaj)
-                        .addComponent(jBtnOtkazi))
-                    .addComponent(jBtnIzmeni))
-                .addGap(42, 42, 42))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnOtkazi)
+                    .addComponent(jBtnAzuriraj)
+                    .addComponent(jBtnIzmeni)
+                    .addComponent(jbtnSacuvaj))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-//        if (Session.getInstance().getMap().containsKey("selected_company")) {
-//            CompanyEntity companyEntity = (CompanyEntity) Session.getInstance().getMap().get("selected_company");
-//            jtxtCompany.setText(companyEntity.getName() + ", " + companyEntity.getAddress());
-//        }
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-//        if (Session.getInstance().getMap().containsKey("selected_company")) {
-//            Session.getInstance().getMap().remove("selected_company");
-//        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jbtnDodajStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajStavkuActionPerformed
@@ -457,12 +449,10 @@ public class FPorudzbina extends javax.swing.JDialog {
     private void postaviModel() {
         try {
             PorudzbinaEntity porudzbina = new PorudzbinaEntity();
-//        bill.setCreatedDate(LocalDate.now());
-//        bill.setCreatedTime(LocalTime.now());
 
-            TableModel billTableModel = new PorudzbinaTableModel(porudzbina);
-            jtblStavkePorudzbine.setModel(billTableModel);
-
+            PorudzbinaTableModel tableModel = new PorudzbinaTableModel(porudzbina);
+            jtblStavkePorudzbine.setModel(tableModel);
+            tableModel.omoguciIzmenu(true);
             List<ProizvodEntity> proizvodi = Controller.ucitajProizvode();
             JComboBox comboBox = new JComboBox(new DefaultComboBoxModel(proizvodi.toArray()));
 
@@ -534,9 +524,11 @@ public class FPorudzbina extends javax.swing.JDialog {
                 jbtnObrisiStavku.setEnabled(true);
                 jTextFieldStatus.setEnabled(false);
                 jTextFieldStatus.setDisabledTextColor(Color.DARK_GRAY);
+                jTextFieldIdPorudzbine.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldDatumPor.setText(LocalDate.now().toString());
                 jTextFieldDatumPor.setEnabled(false);
                 jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
+                jtxtUkupanIznos.setDisabledTextColor(Color.DARK_GRAY);
                 break;
             case KREIRANJE:
                 java.util.Date date = java.sql.Date.valueOf(LocalDate.now());
@@ -548,6 +540,7 @@ public class FPorudzbina extends javax.swing.JDialog {
                 jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldIdPorudzbine.setEnabled(false);
                 jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
+                jtxtUkupanIznos.setDisabledTextColor(Color.DARK_GRAY);
                 jPanel1.setVisible(false);
                 jBtnAzuriraj.setEnabled(false);
                 jBtnIzmeni.setEnabled(false);
@@ -567,6 +560,8 @@ public class FPorudzbina extends javax.swing.JDialog {
                 jTextFieldDatumPor.setEnabled(false);
                 jTextFieldStatus.setEnabled(false);
                 jTextFieldIdPorudzbine.setEnabled(false);
+                jtxtUkupanIznos.setDisabledTextColor(Color.DARK_GRAY);
+                jTextFieldIdPorudzbine.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldStatus.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);
                 jTextFieldDatumPor.setDisabledTextColor(Color.DARK_GRAY);

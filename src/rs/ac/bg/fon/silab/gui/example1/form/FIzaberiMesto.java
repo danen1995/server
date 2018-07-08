@@ -28,6 +28,7 @@ public class FIzaberiMesto extends javax.swing.JDialog {
     public FIzaberiMesto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         popuniTabeluMesta();
 
         centrirajFormu();

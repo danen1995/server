@@ -16,19 +16,21 @@ import rs.ac.bg.fon.silab.jdbc.example1.domen.RadnikEntity;
  *
  * @author Antic
  */
-public class FMain1 extends javax.swing.JDialog {
+public class FGlavniMeni extends javax.swing.JDialog {
   RadnikEntity radnik;
     /**
      * Creates new form FMain1
      */
-    public FMain1(java.awt.Frame parent, boolean modal) {
+    public FGlavniMeni(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
-     public FMain1(java.awt.Frame parent, boolean modal, RadnikEntity radnik) {
+     public FGlavniMeni(java.awt.Frame parent, boolean modal, RadnikEntity radnik) {
         super(parent, modal);
         initComponents();
         this.radnik = radnik;
+        setLocationRelativeTo(null);
     }
 
 
@@ -199,7 +201,7 @@ public class FMain1 extends javax.swing.JDialog {
         try {
             Controller.odjava(radnik);
         } catch (Exception ex) {
-            Logger.getLogger(FMain1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FGlavniMeni.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(this, "Odjavili ste se!");
         dispose();

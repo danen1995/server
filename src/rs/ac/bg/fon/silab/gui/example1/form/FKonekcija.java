@@ -27,6 +27,7 @@ public class FKonekcija extends javax.swing.JDialog {
         super(parent, modal);
         glavna = (FLogovanje) parent;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

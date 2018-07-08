@@ -36,6 +36,7 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
         initComponents();
         popuniTabeluProizvoda();
         pripremiZaPretragu();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -130,6 +131,7 @@ public class FPretragaProizvoda extends javax.swing.JDialog {
 
             JDialog fPr = new FProizvod(null, true, id);
             fPr.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Sistem ne moze da nadje podatke o izabranom proizvodu.");
         }

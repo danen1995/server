@@ -319,9 +319,9 @@ public class FKupac extends javax.swing.JDialog {
             MestoEntity mesto = (MestoEntity) jComboMesto.getSelectedItem();
             KupacEntity kupac = new KupacEntity(jmbg, ime, prezime, datumRodj, email, brTel, adresa, mesto);
             System.out.println("AvA: "+kupac.toString());
-//            kupac = Controller.sacuvajKupca(kupac);
             kupac = (KupacEntity) Controller.zapamtiKupca(kupac);
             JOptionPane.showMessageDialog(this, "Uspesno je sacuvan kupac!");
+            dispose();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Kupac nije uspesno sacuvan!");
@@ -365,6 +365,7 @@ public class FKupac extends javax.swing.JDialog {
             KupacEntity kupac = new KupacEntity(JMBG, ime, prezime, datum, email, brojTelefona, adresa, mesto);
             kupac = (KupacEntity) Controller.izmeniKupca(kupac);
             JOptionPane.showMessageDialog(this, "Sistem je azurirao kupca");
+            dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da azurira kupca");
             Logger.getLogger(FKupac.class.getName()).log(Level.SEVERE, null, ex);

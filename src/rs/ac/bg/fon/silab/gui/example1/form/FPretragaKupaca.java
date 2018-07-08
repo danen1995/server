@@ -32,6 +32,7 @@ public class FPretragaKupaca extends javax.swing.JDialog {
     public FPretragaKupaca(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         popuniTabeluKupaca();
         pripremiZaPretragu();
     }
@@ -128,6 +129,7 @@ public class FPretragaKupaca extends javax.swing.JDialog {
 
             JDialog fKupac = new FKupac(null, true, JMBG);
             fKupac.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Sistem ne moze da nadje podatke o izabranom kupcu.");
         }

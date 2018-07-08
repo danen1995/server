@@ -116,7 +116,7 @@ public class FProizvod extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnIzaberi))
                     .addComponent(jTxtNaziv)
-                    .addComponent(jComboTipProizvoda, 0, 565, Short.MAX_VALUE))
+                    .addComponent(jComboTipProizvoda, 0, 497, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +175,7 @@ public class FProizvod extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 458, Short.MAX_VALUE)
+                        .addGap(0, 390, Short.MAX_VALUE)
                         .addComponent(jBtnOtkazi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnAzuriraj)
@@ -209,6 +209,7 @@ public class FProizvod extends javax.swing.JDialog {
             ProizvodEntity proizvod = new ProizvodEntity(naziv, cena, tipPr);
             proizvod = (ProizvodEntity) Controller.zapamtiProizvod(proizvod);
             JOptionPane.showMessageDialog(this, "Uspesno je sacuvan proizvod!");
+            dispose();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Proizvod nije uspesno sacuvan!");
@@ -246,6 +247,7 @@ public class FProizvod extends javax.swing.JDialog {
             ProizvodEntity proizvod = new ProizvodEntity(this.proizvod.getIdProizvoda(),naziv, cena, tip);
             proizvod = (ProizvodEntity) Controller.izmeniProizvod(proizvod);
             JOptionPane.showMessageDialog(this, "Sistem je azurirao proizvod");
+            dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da azurira proizvod");
             Logger.getLogger(FKupac.class.getName()).log(Level.SEVERE, null, ex);

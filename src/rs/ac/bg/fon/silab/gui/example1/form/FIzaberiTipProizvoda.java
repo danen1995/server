@@ -28,7 +28,7 @@ public class FIzaberiTipProizvoda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         populateTableCities();
-
+        setLocationRelativeTo(null);
         centerForm();
         prepareTableForSort();
     }

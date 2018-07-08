@@ -28,6 +28,7 @@ public class FLogovanje extends javax.swing.JFrame {
      */
     public FLogovanje() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -154,7 +155,7 @@ public class FLogovanje extends javax.swing.JFrame {
             String loz = jTextFieldLozinka.getText();
             RadnikEntity r = new RadnikEntity(korIme, loz);
             r = Controller.logovanje(r);
-            JDialog fmain = new FMain1(this, true,r);
+            JDialog fmain = new FGlavniMeni(this, true,r);
             fmain.setVisible(true);
             this.setVisible(false);
         } catch (Exception ex) {
