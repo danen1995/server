@@ -53,8 +53,6 @@ public class FGlavniMeni extends javax.swing.JDialog {
         jMenuPorudzbina = new javax.swing.JMenu();
         jMenuItemKreirajPorudzbinu = new javax.swing.JMenuItem();
         jMenuItemPretraziPorudzbine = new javax.swing.JMenuItem();
-        jMenuAbout = new javax.swing.JMenu();
-        jMenuItemAuthor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -126,18 +124,6 @@ public class FGlavniMeni extends javax.swing.JDialog {
 
         jMenuBar1.add(jMenuPorudzbina);
 
-        jMenuAbout.setText("O nama");
-
-        jMenuItemAuthor.setText("Autor");
-        jMenuItemAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAuthorActionPerformed(evt);
-            }
-        });
-        jMenuAbout.add(jMenuItemAuthor);
-
-        jMenuBar1.add(jMenuAbout);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,10 +155,6 @@ public class FGlavniMeni extends javax.swing.JDialog {
                 JDialog fPorudzbina = new FPorudzbina(null,true,radnik);
                 fPorudzbina.setVisible(true);
     }//GEN-LAST:event_jMenuItemKreirajPorudzbinuActionPerformed
-
-    private void jMenuItemAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAuthorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemAuthorActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         
@@ -209,9 +191,7 @@ public class FGlavniMeni extends javax.swing.JDialog {
         log.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemAuthor;
     private javax.swing.JMenuItem jMenuItemKreirajKupca;
     private javax.swing.JMenuItem jMenuItemKreirajPorudzbinu;
     private javax.swing.JMenuItem jMenuItemKreirajProizvod;

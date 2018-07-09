@@ -38,7 +38,7 @@ public class PorudzbineTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PorudzbinaEntity porudzbina = porudzbine.get(rowIndex);
+         PorudzbinaEntity porudzbina = porudzbine.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return porudzbina.getIdPorudzbine();

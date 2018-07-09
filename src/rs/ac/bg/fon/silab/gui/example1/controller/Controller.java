@@ -577,6 +577,26 @@ public class Controller {
             throw new Exception("Error in communication!");
         }
     }
+
+    public static List<PorudzbinaEntity> ucitajPorudzbineFilter(String filterPretraga) throws Exception{
+        RequestObject request = new RequestObject();
+        request.setOperation(IOperation.VRATI_SVE_PORUDZBINE_FILTER);
+        request.setData(filterPretraga);
+        Socket socket = Session.getInstance().getSocket();
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(request);
+        out.flush();
+
+        //Sacekaj odgovor
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ResponseObject response = (ResponseObject) in.readObject();
+        int code = response.getCode();
+        if (code == IStatus.OK) {
+            return (List<PorudzbinaEntity>) response.getData();
+        } else {
+            throw new Exception("Greska u komunikaciji!");
+        }
+    }
      
      
 }

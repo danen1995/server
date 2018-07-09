@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.silab.gui.example1.form;
 
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,6 +57,8 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
         jButtonDetalji = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldKriterijum = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxFilter = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,16 +81,24 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
 
         jLabel1.setText("Unesi kriterijum pretrage:");
 
+        jLabel2.setText("Filter:");
+
+        jComboBoxFilter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bez filtera", "U obradi", "Otpremljene", "Dostavljene" }));
+        jComboBoxFilter.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFilterItemStateChanged(evt);
+            }
+        });
+        jComboBoxFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(jTextFieldKriterijum, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,6 +107,16 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonDetalji)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldKriterijum, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(jComboBoxFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +125,11 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldKriterijum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonDetalji)
@@ -128,10 +153,40 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonDetaljiActionPerformed
 
+    private void jComboBoxFilterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFilterItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+            {
+                if(jComboBoxFilter.getSelectedItem().toString().equals("Bez filtera")){
+                    popuniTabeluPorudzbina();
+                    pripremiZaPretragu();
+                    
+                    System.out.println("AAA");
+                }
+                if(jComboBoxFilter.getSelectedItem().toString().equals("U obradi")){
+                    popuniTabeluPorudzbinaFilter("U pripremi");
+                    pripremiZaPretragu();
+                }
+                if(jComboBoxFilter.getSelectedItem().toString().equals("Otpremljene")){
+                    popuniTabeluPorudzbinaFilter("Otpremljeno");
+                    pripremiZaPretragu();
+                }
+                if(jComboBoxFilter.getSelectedItem().toString().equals("Dostavljene")){
+                    popuniTabeluPorudzbinaFilter("Dostavljeno");
+                    pripremiZaPretragu();
+                }
+            }
+    }//GEN-LAST:event_jComboBoxFilterItemStateChanged
+
+    private void jComboBoxFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFilterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDetalji;
+    private javax.swing.JComboBox jComboBoxFilter;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePorudzbine;
     private javax.swing.JTextField jTextFieldKriterijum;
@@ -184,6 +239,23 @@ public class FPretragaPorudzbina extends javax.swing.JDialog {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+    }
+
+    private void popuniTabeluPorudzbinaFilter(String filter) {
+         try {
+            String filterPretraga = " WHERE porudzbina.status = '"+filter+"'";
+            List<PorudzbinaEntity> porudzbinaLista = Controller.ucitajPorudzbineFilter(filterPretraga);
+             for (PorudzbinaEntity porudzbinaEntity : porudzbinaLista) {
+                 System.out.println(porudzbinaEntity);
+             }
+//            if(porudzbinaLista.size()>0){
+                System.out.println(porudzbinaLista.size());
+                PorudzbineTableModel tm = new PorudzbineTableModel(porudzbinaLista);
+                jTablePorudzbine.setModel(tm);
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaPorudzbina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

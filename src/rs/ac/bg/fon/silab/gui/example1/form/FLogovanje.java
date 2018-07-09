@@ -58,11 +58,7 @@ public class FLogovanje extends javax.swing.JFrame {
 
         jLabel1.setText("Korisnicko ime: ");
 
-        jTextFieldKorIme.setText("pera");
-
         jLabel2.setText(" Lozinka: ");
-
-        jTextFieldLozinka.setText("pera");
 
         jButtonLogovanje.setText("Ulogujte se");
         jButtonLogovanje.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +151,7 @@ public class FLogovanje extends javax.swing.JFrame {
             String loz = jTextFieldLozinka.getText();
             RadnikEntity r = new RadnikEntity(korIme, loz);
             r = Controller.logovanje(r);
+            JOptionPane.showMessageDialog(null, "Uspesno ste se ulogovali.");
             JDialog fmain = new FGlavniMeni(this, true,r);
             fmain.setVisible(true);
             this.setVisible(false);
